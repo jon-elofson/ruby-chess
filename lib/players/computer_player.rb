@@ -24,8 +24,9 @@ class ComputerPlayer
     avoid_checks = []
     @all_moves.each do |move|
       hyp_board = @board.deep_dup
-      hyp_board.move(*move)
-      checks << move if hyp_board.in_check?(@color)
+      if hyp_board.move!(*move)
+        avoid_checks << move if hyp_board.in_check?(@color)
+      end
     end
     avoid_checks
   end
@@ -81,7 +82,7 @@ class ComputerPlayer
 
   def prompt(board)
     @board ||= board
-    @pieces = find_moveable_pieces
+    @pieces = find_movable_pieces
     @all_moves = find_all_moves
     @no_check_moves = @all_moves - avoid_checks
     determine_best_move

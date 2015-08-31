@@ -99,7 +99,6 @@ class Board
       if valid_move?(start_pos,end_pos)
         move!(start_pos, end_pos)
       else
-        puts "Can't make that move!"
         raise MoveError
       end
     end
