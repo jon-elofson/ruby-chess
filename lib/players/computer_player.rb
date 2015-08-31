@@ -4,20 +4,23 @@ class ComputerPlayer
 
   attr_reader :name, :color
 
+  piece_values = {Pawn => 1, Knight => 3, Bishop => 3, Rook => 5, Queen => 9}
+
   def initialize(name,color)
     @name = name
     @color = color
   end
 
   def captures
-    captures = []
+    captures = {}
     @no_check_moves.each do |move|
       end_pos = move[1]
       if @board.occupied?(end_pos) && @board[*end_pos].color != @color
-        captures << move
+        capt_val = piece_values[@board[*move[1]].class]
+        captures[move] = capt_val
       end
     end
-    captures
+    captures.sort { |a,b| b[1] <=> a[1] }
   end
 
   def avoid_checks
@@ -74,7 +77,7 @@ class ComputerPlayer
     elsif checks.any?
       checks.sample
     elsif captures.any?
-      captures.sample
+      captures[0]
     else
       @no_check_moves.sample
     end
