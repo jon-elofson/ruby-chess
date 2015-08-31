@@ -1,7 +1,7 @@
-require_relative 'board'
-require_relative 'display'
-require_relative 'player'
-require_relative 'move_error'
+require_relative 'lib/board'
+require_relative 'lib/display'
+require_relative 'lib/player'
+require_relative 'lib/move_error'
 
 class Chess
 

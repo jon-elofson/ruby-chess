@@ -1,5 +1,3 @@
-require 'byebug'
-
 module Moveable
 
   def valid_move?(pos,test_pos)
@@ -64,10 +62,6 @@ module Moveable
       pawn_moves += diff_eval_p(pos,board, black_diff)
     end
   end
-
-  # def valid_diags(diags)
-  #   diags.select { |d| board[*d].piece? && board[*d].color != board[*pos].color }
-  # end
 
 
   def diff_eval_kk(pos,board,diffs)
