@@ -63,21 +63,28 @@ class ComputerPlayer
     all_moves
   end
 
-  def prompt(board)
-    @board = board
-    @pieces = board.find_pieces(@color).select { |piece| piece.possible_moves.length > 0}
-    @all_moves = find_all_moves
+  def find_movable_pieces
+    @board.find_pieces(@color).select { |piece| piece.possible_moves.any? }
+  end
+
+  def determine_best_move
     if @board.in_check?(@color)
       get_out_of_check.sample
-    end
-    @no_check_moves = @all_moves - avoid_checks
-    if checks.any?
+    elsif checks.any?
       checks.sample
     elsif captures.any?
       captures.sample
     else
       @no_check_moves.sample
     end
+  end
+
+  def prompt(board)
+    @board ||= board
+    @pieces = find_moveable_pieces
+    @all_moves = find_all_moves
+    @no_check_moves = @all_moves - avoid_checks
+    determine_best_move
   end
 
 
