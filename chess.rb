@@ -2,6 +2,7 @@ require_relative 'lib/board'
 require_relative 'lib/display'
 require_relative 'lib/player'
 require_relative 'lib/move_error'
+require 'yaml'
 
 class Chess
 

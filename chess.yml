@@ -245,9 +245,11 @@ display: !ruby/object:Display
   board: *1
   save: false
   cpos:
+  - 6
+  - 1
+  start_pos:
   - 0
   - 0
-  start_pos: 
   end_pos: 
   turn: true
 last_player: *3
