@@ -21,8 +21,20 @@ class Chess
     end
   end
 
+  def instructions
+    system("clear")
+    puts "INSTRUCTIONS
+    \n You can move your cursor with the arrow keys (▲ ▼ ◀ ▶).
+    \n To select a piece, hit ENTER.
+    \n Then, select the square you would like to move to and hit SPACE.
+    \n Hit q to leave the game.
+    \n Hit any key to begin."
+    input = gets
+    return if input
+  end
+
   def play
-    #instructions
+    instructions
     until game_over? || @display.save
       find_current_player
       begin
@@ -89,15 +101,25 @@ class Chess
 end
 
 if __FILE__ == $PROGRAM_NAME
-  puts "Would you like to load a saved game?"
+  puts "Would you like to load a saved game? (y/n)"
   input = gets.chomp
   if input =~ /\A[y]\z/i
     saved_game = YAML::load_file('chess.yml')
     saved_game.play
   else
-    a = Player.new("Jon", :black)
-    b = Player.new("Varun", :white)
-    c = Chess.new([a, b])
+    puts "Enter your name!"
+    player1_name = gets.chomp
+    a = Player.new(player1_name, :black)
+    puts "Would you like to play the computer? (y/n)"
+    response = gets.chomp
+    if response =~ /\A[y]\z/i
+      b = Player.new("KID-A", :white)
+    else
+      puts "Enter player 2's name!"
+      player2_name = gets.chomp
+      b = Player.new(player2_name,:white)
+    end
+    c = Chess.new([a,b])
     c.play
   end
 end

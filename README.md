@@ -2,8 +2,6 @@
 
 A Ruby implementation with a command line interface
 
-[Live](http://www.jon-tron.com)
-
 ## How to Play
 
 ###Getting Set Up
