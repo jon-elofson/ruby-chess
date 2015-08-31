@@ -1,4 +1,4 @@
-require_relative 'moveable'
+require_relative '../modules/moveable'
 
 class Piece
   include Moveable
