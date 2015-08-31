@@ -26,7 +26,7 @@ class ComputerPlayer
       hyp_board.move()
       checks << [pieve.pos,move] if hyp_board.in_check?(@color)
     end
-    return avoid_checks
+    avoid_checks
   end
 
   def checks
@@ -38,7 +38,7 @@ class ComputerPlayer
         checks << [pieve.pos,move]
       end
     end
-    return checks
+    checks
   end
 
   def find_all_moves
@@ -48,7 +48,7 @@ class ComputerPlayer
         all_moves << [piece.pos,move]
       end
     end
-    return all_moves
+    all_moves
   end
 
   def prompt(board)
