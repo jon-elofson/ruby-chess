@@ -1,4 +1,8 @@
+require_relative '../modules/slideable'
+
 class Queen < Piece
+
+  include Slideable
 
   def initialize(pos,color,board)
     super
@@ -11,6 +15,11 @@ class Queen < Piece
 
   def possible_moves
     find_diagonals(pos, board) + find_xy_pos(pos,board)
+  end
+
+  def valid_move?(pos,test_pos)
+    board.on_board?(test_pos) && (board[*test_pos].empty? ||
+         (board[*test_pos].color != board[*pos].color ))
   end
 
 

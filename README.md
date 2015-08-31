@@ -1,6 +1,6 @@
 # Chess
 
-A Ruby implementation with a command line interface
+A Ruby implementation with a command line interface.
 
 ## How to Play
 
@@ -18,7 +18,17 @@ The game is written with Ruby. It requires two gems - colorize and io-console.
 
 ## Implementation Details
 
+### Game Saving
+Used YAML to allow the saving of game states. Users now have the option to load previous games on initialize.
+
+### Modules
+Used multiple modules (moveable, slideable, steppable) to keep the code as DRY as possible. 
+
+
 ### AI
 
 
+
 ## TODO
+* working on my knight moves
+* implement poly tree node for AI

@@ -1,4 +1,8 @@
+require_relative '../modules/slideable'
+
 class Rook < Piece
+
+  include Slideable
 
   def initialize(pos,color,board)
     super

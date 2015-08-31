@@ -44,7 +44,7 @@ class Chess
         make_move unless @display.save
       rescue MoveError
         puts "Invalid move!"
-        sleep(2)
+        sleep(1)
         retry
       end
       break if game_over? || @display.save
@@ -80,7 +80,7 @@ class Chess
   def display_winner
     puts "Game over. White won!" if @board.checkmate?(:black)
     puts "Game over. Black won!" if @board.checkmate?(:white)
-    sleep(2)
+    sleep(3)
   end
 
   def game_over?

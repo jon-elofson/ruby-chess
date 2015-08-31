@@ -1,7 +1,4 @@
-require_relative '../modules/moveable'
-
 class Piece
-  include Moveable
 
   attr_reader :color, :board
   attr_accessor :pos
@@ -22,6 +19,11 @@ class Piece
 
   def dup(board_copy)
     self.class.new(pos,color,board_copy)
+  end
+
+  def valid_move?(pos,test_pos)
+    board.on_board?(test_pos) && (board[*test_pos].empty? ||
+         (board[*test_pos].color != board[*pos].color ))
   end
 
 end
