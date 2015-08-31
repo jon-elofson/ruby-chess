@@ -13,7 +13,6 @@ You will need Ruby installed on your system to play this game. Download the code
 You can move your cursor with the arrow keys (▲ ▼ ◀ ▶). When you hover over a piece, all of the squares where that piece can move will be highlighted in green To select a piece to move, hit ENTER. Then, select the square you would like to move to and hit SPACE.
 
 ![chess-screenshot](images/chess-screenshot.png)
-Format: ![Alt Text](url)
 
 ## Technologies
 
