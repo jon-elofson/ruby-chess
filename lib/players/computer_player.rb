@@ -1,3 +1,5 @@
+require 'byebug'
+
 class ComputerPlayer
 
   attr_reader :name, :color
@@ -10,9 +12,9 @@ class ComputerPlayer
   def captures
     captures = []
     @no_check_moves.each do |move|
-      start_pos,end_pos = move
+      end_pos = move[1]
       if @board.occupied?(end_pos) && @board[*end_pos].color != @color
-        captures << [start_pos,end_pos]
+        captures << move
       end
     end
     captures
@@ -21,10 +23,9 @@ class ComputerPlayer
   def avoid_checks
     avoid_checks = []
     @all_moves.each do |move|
-      start_pos, end_pos = move
       hyp_board = @board.deep_dup
-      hyp_board.move()
-      checks << [pieve.pos,move] if hyp_board.in_check?(@color)
+      hyp_board.move(*move)
+      checks << move if hyp_board.in_check?(@color)
     end
     avoid_checks
   end
@@ -32,11 +33,10 @@ class ComputerPlayer
   def checks
     checks = []
     @all_moves.each do |move|
-      start_pos, end_pos = move
       hyp_board = @board.deep_dup
-      hyp_board.move(piece.pos,move)
-      if hyp_board.in_check?(board.other_color(@color))
-        checks << [pieve.pos,move]
+      hyp_board.move(*move)
+      if hyp_board.in_check?(@board.other_color(@color))
+        checks << move
       end
     end
     checks
