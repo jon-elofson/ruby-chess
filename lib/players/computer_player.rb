@@ -42,6 +42,17 @@ class ComputerPlayer
     checks
   end
 
+
+  def get_out_of_check
+    out_of_check_moves = []
+    @all_moves.each do |move|
+      hyp_board = @board.deep_dup
+      hyp_board.move(*move)
+      out_of_check_moves << move if !hyp_board.in_check?(@color)
+    end
+    out_of_check_moves
+  end
+
   def find_all_moves
     all_moves = []
     @pieces.each do |piece|
@@ -56,6 +67,9 @@ class ComputerPlayer
     @board = board
     @pieces = board.find_pieces(@color).select { |piece| piece.possible_moves.length > 0}
     @all_moves = find_all_moves
+    if @board.in_check?(@color)
+      get_out_of_check.sample
+    end
     @no_check_moves = @all_moves - avoid_checks
     if checks.any?
       checks.sample
