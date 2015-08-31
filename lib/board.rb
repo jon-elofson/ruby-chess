@@ -34,9 +34,6 @@ class Board
     pos.all? { |i| i.between?(0, 7) }
   end
 
-
-
-
     def populate_board
       populate_back_row(:black)
       populate_back_row(:white)

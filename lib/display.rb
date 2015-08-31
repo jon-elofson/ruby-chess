@@ -74,6 +74,7 @@ class Display
         interpret_char
       end
     else
+      system("clear")
       show_board
       sleep(2)
       ai_choice = @game.current_player.prompt(@board)
