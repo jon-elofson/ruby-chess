@@ -32,6 +32,7 @@ class ComputerPlayer
   def checks
     checks = []
     @all_moves.each do |move|
+      start_pos, end_pos = move
       hyp_board = @board.deep_dup
       hyp_board.move(piece.pos,move)
       if hyp_board.in_check?(board.other_color(@color))
