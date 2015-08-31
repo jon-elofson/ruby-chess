@@ -1,4 +1,4 @@
-class Player
+class HumanPlayer
 
   attr_reader :name, :color
 
@@ -6,8 +6,5 @@ class Player
     @name = name
     @color = color
   end
-
-  def prompt
-  end
-
+  
 end

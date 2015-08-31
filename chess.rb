@@ -1,6 +1,7 @@
 require_relative 'lib/board'
 require_relative 'lib/display'
-require_relative 'lib/player'
+require_relative 'lib/human_player'
+require_relative 'lib/computer_player'
 require_relative 'lib/move_error'
 require 'yaml'
 
@@ -112,15 +113,15 @@ if __FILE__ == $PROGRAM_NAME
   else
     puts "Enter your name!"
     player1_name = gets.chomp
-    a = Player.new(player1_name, :black)
+    a = HumanPlayer.new(player1_name, :black)
     puts "Would you like to play the computer? (y/n)"
     response = gets.chomp
     if response =~ /\A[y]\z/i
-      b = Player.new("KID-A", :white)
+      b = ComputerPlayer.new("KID-A", :white)
     else
       puts "Enter player 2's name!"
       player2_name = gets.chomp
-      b = Player.new(player2_name,:white)
+      b = HumanPlayer.new(player2_name,:white)
     end
     c = Chess.new([a,b])
     c.play

@@ -1,5 +1,6 @@
 require 'io/console'
 require 'colorize'
+require 'byebug'
 
 class Display
 
@@ -33,14 +34,6 @@ class Display
   def interpret_char
     c = read_char
     case c
-    when "w"
-      cpos[0] -= 1 unless cpos[0] == 0
-    when "s"
-      cpos[0] += 1 unless cpos[0] == 7
-    when "d"
-      cpos[1] += 1 unless cpos[1] == 7
-    when "a"
-      cpos[1] -= 1 unless cpos[1] == 0
     when "\e[A"
       cpos[0] -= 1 unless cpos[0] == 0
     when "\e[B"
@@ -55,27 +48,38 @@ class Display
       self.end_pos = cpos.clone
       @turn = false if @start_pos != nil
     when "q"
-      puts "Would you like to save the game (y/n)?"
-      input = gets.chomp
-      if input =~ /\A[y]\z/i
-        @save = true
-      else
-        exit 0
-      end
+      save_game_message
+    end
+  end
+
+  def save_game_message
+    puts "Would you like to save the game (y/n)?"
+    input = gets.chomp
+    if input =~ /\A[y]\z/i
+      @save = true
+    else
+      exit 0
     end
   end
 
   def render
-    @cpos = [0,0]
+    @cpos ||= [4,5]
     @start_pos = nil
     @end_pos = nil
     @turn = true
-    while @turn && !@save
-      system("clear")
+    if @game.current_player.class == HumanPlayer
+      while @turn && !@save
+        system("clear")
+        show_board
+        interpret_char
+      end
+    else
       show_board
-      interpret_char
+      sleep(2)
+      ai_choice = @game.current_player.prompt(@board)
+      @start_pos = ai_choice[0]
+      @end_pos = ai_choice[1]
     end
-
   end
 
   def player_pawn
