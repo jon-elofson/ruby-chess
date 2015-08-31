@@ -1,7 +1,7 @@
 require_relative 'lib/board'
 require_relative 'lib/display'
-require_relative 'lib/human_player'
-require_relative 'lib/computer_player'
+require_relative 'lib/players/human_player'
+require_relative 'lib/players/computer_player'
 require_relative 'lib/move_error'
 require 'yaml'
 
