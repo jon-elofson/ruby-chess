@@ -18,19 +18,21 @@ The game is written with Ruby. It requires two gems - colorize and io-console.
 
 ## Implementation Details
 
-### Game Saving
+### [Game Saving][game-saving]
 Used YAML to allow the saving of game states. Users now have the option to load previous games on initialize.
 
 
 
-### Modules
+### [Modules][slideable]
 Used modules (slideable, steppable) and inheritance to keep the code as DRY as possible.
 
 
-### AI
-AI identifies puts other player into check if possible and avoids putting itself into check. It will capture the highest value piece that it can.
+### [AI][ai]
+AI identifies puts other player into check/checkmate if possible and avoids putting itself into check. It will capture the highest value piece that it can.
 
-
+[slideable]:https://github.com/jon-elofson/ruby-chess/blob/master/lib/modules/slideable.rb#L1
+[ai]:https://github.com/jon-elofson/ruby-chess/blob/master/lib/players/computer_player.rb#L85
+[game-saving]:https://github.com/jon-elofson/ruby-chess/blob/master/chess.rb#L76
 
 
 ## TODO
