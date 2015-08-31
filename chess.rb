@@ -39,7 +39,6 @@ class Chess
     until game_over? || @display.save
       find_current_player
       begin
-        @current_player.prompt
         @display.render
         make_move unless @display.save
       rescue MoveError
@@ -49,7 +48,10 @@ class Chess
       break if game_over? || @display.save
       @last_player = @current_player
     end
+    check_game_over
+  end
 
+  def check_game_over
     if game_over?
       display_winner
       @display.render

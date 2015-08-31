@@ -78,8 +78,16 @@ class Display
 
   end
 
+  def player_pawn
+    if @game.current_player.color == :white
+      return "♙"
+    else
+      return "♟"
+    end
+  end
+
   def show_board
-    puts "#{@game.current_player.name}'s turn!"
+    puts "#{@game.current_player.name}'s turn! #{player_pawn}"
     puts '  ' + ('A'..'H').to_a.join(" ")
     8.times do |row|
       print_row = ''
@@ -102,10 +110,14 @@ class Display
       end
       puts (8 - row).to_s + " " + print_row.colorize(:color => :light_white)
     end
-    print "White Captured:"
-    puts @board.white_captured.join
-    print "Black Captured:"
-    puts @board.black_captured.join
+    add_captured_pieces
     nil
   end
+end
+
+def add_captured_pieces
+  print "White Captured:"
+  puts @board.white_captured.join
+  print "Black Captured:"
+  puts @board.black_captured.join
 end

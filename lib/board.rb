@@ -144,13 +144,3 @@ class Board
       board_copy
     end
 end
-
-if __FILE__ == $PROGRAM_NAME
-  b = Board.new(false)
-  b[6,5] = Queen.new([6,5],:black, b)
-  b[5,6] = Queen.new([5,6],:black, b)
-  b[4,7] = Queen.new([4,7],:black, b)
-  b[7,7] = King.new([7,7], :white, b)
-  p b.checkmate?(:white)
-
-end
