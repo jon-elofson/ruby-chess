@@ -21,11 +21,15 @@ The game is written with Ruby. It requires two gems - colorize and io-console.
 ### Game Saving
 Used YAML to allow the saving of game states. Users now have the option to load previous games on initialize.
 
+
+
 ### Modules
 Used modules (slideable, steppable) and inheritance to keep the code as DRY as possible.
 
 
 ### AI
+AI identifies puts other player into check if possible and avoids putting itself into check. It will capture the highest value piece that it can.
+
 
 
 

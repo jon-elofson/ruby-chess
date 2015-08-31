@@ -4,11 +4,10 @@ class ComputerPlayer
 
   attr_reader :name, :color
 
-  piece_values = {Pawn => 1, Knight => 3, Bishop => 3, Rook => 5, Queen => 9}
-
   def initialize(name,color)
     @name = name
     @color = color
+    @piece_values = {Pawn => 1, Knight => 3, Bishop => 3, Rook => 5, Queen => 9}
   end
 
   def captures
@@ -16,11 +15,11 @@ class ComputerPlayer
     @no_check_moves.each do |move|
       end_pos = move[1]
       if @board.occupied?(end_pos) && @board[*end_pos].color != @color
-        capt_val = piece_values[@board[*move[1]].class]
+        capt_val = @piece_values[@board[*move[1]].class]
         captures[move] = capt_val
       end
     end
-    captures.sort { |a,b| b[1] <=> a[1] }
+    captures.sort { |a,b| b[1] <=> a[1] }.map { |capt| capt[0] }
   end
 
   def avoid_checks
@@ -36,9 +35,9 @@ class ComputerPlayer
 
   def checks
     checks = []
-    @all_moves.each do |move|
+    @no_check_moves.each do |move|
       hyp_board = @board.deep_dup
-      hyp_board.move(*move)
+      hyp_board.move!(*move)
       if hyp_board.in_check?(@board.other_color(@color))
         checks << move
       end
@@ -46,12 +45,24 @@ class ComputerPlayer
     checks
   end
 
+  def check_mates
+    check_mates = []
+    @no_check_moves.each do |move|
+      hyp_board = @board.deep_dup
+      hyp_board.move!(*move)
+      if hyp_board.checkmate?(@board.other_color(@color))
+        check_mates << move
+      end
+    end
+    check_mates
+  end
+
 
   def get_out_of_check
     out_of_check_moves = []
     @all_moves.each do |move|
       hyp_board = @board.deep_dup
-      hyp_board.move(*move)
+      hyp_board.move!(*move)
       out_of_check_moves << move if !hyp_board.in_check?(@color)
     end
     out_of_check_moves
@@ -74,6 +85,8 @@ class ComputerPlayer
   def determine_best_move
     if @board.in_check?(@color)
       get_out_of_check.sample
+    elsif check_mates.any?
+      check_mates.sample
     elsif checks.any?
       checks.sample
     elsif captures.any?
